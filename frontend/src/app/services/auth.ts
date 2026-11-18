@@ -13,6 +13,8 @@ export interface AuthResponse {
 })
 export class Auth {
   private apiUrl = '/api/v1/auth';
+  private username = '';
+  private password = '';
 
   constructor(private http: HttpClient) {}
 
@@ -20,6 +22,8 @@ export class Auth {
     const formData = new FormData();
     formData.append('username', username);
     formData.append('password', password);
+    this.username = username;
+    this.password = password;
 
     return this.http.post<AuthResponse>(
       `${this.apiUrl}/login`,
@@ -45,6 +49,9 @@ export class Auth {
   getToken(): string | null {
     return localStorage.getItem('access_token');
   }
+  getBasicAuthHeader(): string {
+  return 'Basic ' + btoa(`${this.username}:${this.password}`);
+ }
 
   logout(): void {
     localStorage.removeItem('access_token');

@@ -1,0 +1,25 @@
+
+<div class="dashboard-container">
+
+  <h1>CyberShield Dashboard</h1>
+  <p>Vulnerability Management Overview</p>
+
+  <div class="stats-container">
+
+    <div class="stat-card">
+      <h3>Total Vulnerabilities</h3>
+
+      <p *ngIf="isLoading">Loading...</p>
+
+      <h2 *ngIf="!isLoading && !errorMessage">
+        {{ vulnerabilityCount }}
+      </h2>
+
+      <p class="error-message" *ngIf="errorMessage">
+        {{ errorMessage }}
+      </p>
+    </div>
+
+  </div>
+
+</div>
